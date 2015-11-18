@@ -5,7 +5,7 @@ include <shapes.scad>
 module atcHub() {
     triangle_base = 38;
     cone_top_dia = 40;
-   cone_bottom_dia = cone_top_dia-tan(9.5)*cone_top_dia;
+    cone_bottom_dia = cone_top_dia-tan(9.5)*cone_top_dia;
  
     triangle_h = 12.5;
     hub_h = 19;
@@ -20,7 +20,8 @@ module atcHub() {
     opening = bearing_od - 2;
     magnet_height = 6;
     magnet_dia=6.3;
-    magnet_mount_dia=9.5;
+    magnet_mount_dia=10;
+    magnet_mount_distance = 27;
 
     module threeSides() {
         children();
@@ -57,6 +58,15 @@ module atcHub() {
                 translate([-12,hub_h,nut_depth])rotate([0,0,30])cylinder(d=m3_nut_slot, h=m3_nut_height, $fn=6);
             }
        }
+       // Bearing joint mount holes
+       translate([0,0,bearing_od/2 + 1])rotate([90,0,60]) {
+           // screw hole
+           cylinder(d=m3_dia, h=magnet_mount_distance+magnet_mount_dia+1);
+           // nut hole
+           cylinder(d=m3_nut_dia, h=21, $fn=6);
+       }
+
+ 
 }
     
  
@@ -67,9 +77,10 @@ module atcHub() {
                 union() {
                     // body
                     cylinder(d=hexagon_dia*2, h=hub_h, $fn=6);
-                    threeSides()translate([-10,27-magnet_mount_dia/2,0])roundedCube([20, magnet_mount_dia, 15]);
+                    // Joint mounts
+                    threeSides()translate([-10,magnet_mount_distance-magnet_mount_dia/2,0])roundedCube([20, magnet_mount_dia, 15]);
                     // Magnet mounts 
-                    threeSides()translate([0,27,0])roundedCylinder(d=magnet_mount_dia, h=hub_h);
+                    threeSides()translate([0,magnet_mount_distance,0])roundedCylinder(d=magnet_mount_dia, h=hub_h);
                }
                 // Make holes for fans, screws, nuts
                 threeSides()sideExclusions();
@@ -86,7 +97,7 @@ module atcHub() {
         // remove top inside edge
         translate([0,0,hub_h-1.5])cylinder(d1=cone_top_dia-1, d2=cone_top_dia+1,h=1.5);
         // Magnet holes
-        threeSides()translate([0,27,0]) {
+        threeSides()translate([0,magnet_mount_distance,0]) {
             cylinder(d=m3_dia, h=hub_h);
             translate([0,0,hub_h-magnet_height])cylinder(d=magnet_dia, h=magnet_height);
         }
@@ -94,7 +105,6 @@ module atcHub() {
 
 
 }
-
 //$fa=3;
 //$fs=0.2;
 
