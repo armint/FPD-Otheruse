@@ -73,29 +73,6 @@ module deltaArmBase(height_l = 6.5, height_h = 12.5, length = 90, base_dia = 32,
 }
 
 
-module deltaArmBearingMount(length = 90) {
-    height_h = 12.5;
-    nut_depth = 5;
-    screw_dist = 7;
-    mount_dia = bearing_od + 2*wall_thickness;
-   difference() {
-        mountHoles(height_h)deltaArmBase(height_l = 6.5, height_h = height_h, length);
-        // Make space for bearing mount
-        translate([-10, length, 0])cube([2*mount_dia,10,height_l + 1]);
-        translate([0,length,0])cylinder(d = bearing_od, h = height_l);
-
-        // M2 bolts
-        translate([mount_dia/2,length,height_l/2])rotate([90,0,0])cylinder(d=m2_dia, h=bearing_cap_flange);
-        translate([-mount_dia/2,length,height_l/2])rotate([90,0,0])cylinder(d=m2_dia, h=bearing_cap_flange);
-        // M2 nuts
-        translate([mount_dia/2,length-bearing_cap_flange,height_l/2])rotate([90,0,0])cylinder(d=m2_nut_dia, h=m2_nut_height, $fn=6);
-        translate([-mount_dia/2,length-bearing_cap_flange,height_l/2])rotate([90,0,0])cylinder(d=m2_nut_dia, h=m2_nut_height, $fn=6);
-    }
-    // add bearing mount
-    translate([0, length, 0])bearingMount(false, bearing_cap_flange);
-}
-
-
 module deltaArmAlt(length = 90) {
     opening = bearing_od - 2;
     mount_dia = bearing_od + 2*wall_thickness;
@@ -121,26 +98,42 @@ module deltaArmAlt(length = 90) {
  
 }
 
-module deltaArmBearingBlock() {
+module deltaArm(hex = true) {
     height_h = 12.5;
     axis_distance = 90 - 12;
-    height_l = 10;
     end_dia = 15;
+    angle = atan2((32 - end_dia)/2, axis_distance);
+    height_l = 7;
     difference() {
         union() {
             mountHoles(height_h)deltaArmBase(height_l = height_l, height_h = height_h, length = axis_distance, base_dia = 32, end_dia=end_dia);
-            translate([-end_dia/2,axis_distance-10,0])cube([end_dia, 10, height_l]);
+//            translate([-end_dia/2,axis_distance-10,0])cube([end_dia, 10, height_l]);
+                   // base
+            translate([0,axis_distance,0])mirror([0,1,0])hull() {
+                translate([-end_dia/2, 0, 0])cube([end_dia, 1,height_l]);
+                translate([-end_dia/2, 0, 0])rotate([0,0,angle])translate([2,15,0])cylinder(r=2, h = height_l);
+                translate([end_dia/2, 0, 0])rotate([0,0,-angle])translate([-2,15,0])cylinder(r=2, h = height_l);
+            }
         }
         // Slice top off
-        translate([-end_dia/2,axis_distance,0])cube([end_dia, wall_thickness, height_l+1]);
-        // screw hole
-        translate([0,axis_distance-10,height_l/2])rotate([-90,0,0])cylinder(d=m3_dia, h=10);
-        // nut hole
-        translate([0,axis_distance-10,height_l/2])rotate([-90,0,0])cylinder(d=m3_nut_dia, h=m3_nut_height, $fn=6);
+        translate([-end_dia/2,axis_distance,0])cube([end_dia, wall_thickness, height_h]);
+        // screw holes
+        translate([-end_dia/2 + 3, axis_distance - 12, 0])cylinder(d=m3_dia, h=height_h);
+        translate([end_dia/2 - 3, axis_distance - 12, 0])cylinder(d=m3_dia, h=height_h);
+        // nut holes
+        if (hex) {
+            translate([-end_dia/2 + 3, axis_distance - 12, 4])cylinder(d=m3_nut_dia, h=height_h, $fn=6);
+            translate([end_dia/2 - 3, axis_distance - 12, 4])cylinder(d=m3_nut_dia, h=height_h, $fn=6);
+        }
+        else {
+            translate([-end_dia/2 + 3, axis_distance - 12, 4])cylinder(d=m3_nut_dia, h=height_h);
+            translate([end_dia/2 - 3, axis_distance - 12, 4])cylinder(d=m3_nut_dia, h=height_h);
+        }
     }
 }
 
 //$fa=3;
 //$fs=0.2;
-deltaArmBearingBlock();
+deltaArm(true);
+translate([28,62,0])mirror([0,1,0])deltaArm(false);
 
