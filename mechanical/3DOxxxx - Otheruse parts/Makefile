@@ -18,7 +18,7 @@ parts : $(TARGET) $(TARGETS)
 $(TARGET) :
 	mkdir -p $(TARGET)
 
-$(TARGET)/%.stl : %.scad shapes.scad configuration.scad
+$(TARGET)/%.stl : %.scad $(EXTRAS)
 	@echo "Processing $@"
 	$(OPENSCAD) -o $@ -D'$(OPENSCAD_SETTINGS)' $<
 
