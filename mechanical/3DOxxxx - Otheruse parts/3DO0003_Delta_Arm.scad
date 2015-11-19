@@ -100,7 +100,8 @@ module deltaArmAlt(length = 90) {
 
 module deltaArm() {
     height_h = 12.5;
-    axis_distance = 90 - 12;
+    // Original arm length - bearing joint diameter - nut height
+    axis_distance = 90 - 10 - 2.5;
     end_dia = 15;
     angle = atan2((32 - end_dia)/2, axis_distance);
     height_l = 7;

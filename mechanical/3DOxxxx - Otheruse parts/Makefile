@@ -12,8 +12,12 @@ PARTS=$(join $(addsuffix $(TARGET)/, $(dir $(FILES))), $(notdir $(FILES:.scad=.s
 
 TARGETS=$(PARTS)
 
-all: parts 
 parts : $(TARGET) $(TARGETS)
+
+assembly: $(TARGET) $(TARGET)/assembly.stl
+
+all: parts assembly
+
 
 $(TARGET) :
 	mkdir -p $(TARGET)
@@ -23,5 +27,5 @@ $(TARGET)/%.stl : %.scad $(EXTRAS)
 	$(OPENSCAD) -o $@ -D'$(OPENSCAD_SETTINGS);$(subst $(TARGET)/,,$(subst .stl,();,$@))' $<
 
 clean :
-	rm @-rm -f $(TARGET) $(TARGETS)
+	rm @-rm -f $(TARGET) $(TARGETS) $(TARGET)/assembly.stl
 

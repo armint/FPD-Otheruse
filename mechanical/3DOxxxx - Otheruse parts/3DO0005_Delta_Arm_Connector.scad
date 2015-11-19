@@ -8,7 +8,7 @@ module deltaArmConnector() {
     wall_thickness = 2.5;
     interruptor_thickness = 1;
     // angle is based on delta arm dimesions
-    angle = atan2((32 - width)/2, 90-12);
+    angle = atan2((32 - width)/2, 90-10-2.5);
     difference() {
         union() {
             // base
@@ -19,15 +19,19 @@ module deltaArmConnector() {
             }
             // limit switch interruptor
             hull() {
+                translate([26,0,40])rotate([90,0,0])cylinder(d=2, h=1, center=true);
                 translate([22,0,40])rotate([90,0,0])cylinder(d=2, h=1, center=true);
-                translate([18,0,40])rotate([90,0,0])cylinder(d=2, h=1, center=true);
 
-                translate([16,0,16])rotate([90,0,0])cylinder(d=2, h=1, center=true);
-//                translate([18,0,16])rotate([90,0,0])cylinder(d=2, h=1, center=true);
-                translate([6,0,10])rotate([90,0,0])cylinder(d=2, h=1, center=true);
-                translate([5,0,1])rotate([90,0,0])cylinder(d=2, h=1, center=true);
-                translate([15,0,1])rotate([90,0,0])cylinder(d=2, h=1, center=true);
+                translate([18,0,16])rotate([90,0,0])cylinder(d=2, h=1, center=true);
+                translate([12,0,16])rotate([90,0,0])cylinder(d=2, h=1, center=true);
             }
+            hull() {
+                translate([5,0,16])rotate([90,0,0])cylinder(d=2, h=1, center=true);
+                translate([18,0,16])rotate([90,0,0])cylinder(d=2, h=1, center=true);
+                translate([5,0,1])rotate([90,0,0])cylinder(d=2, h=1, center=true);
+                translate([13,0,1])rotate([90,0,0])cylinder(d=2, h=1, center=true);
+            }
+
         }
         translate([0,-height/2,17])rotate([-90,0,0]) {
             // bearing joint mount

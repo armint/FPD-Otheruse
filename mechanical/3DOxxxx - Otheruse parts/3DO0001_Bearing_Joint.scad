@@ -14,7 +14,7 @@ bearing_center =  bearing_od/2 + center_offset;
 
 module bearingSlot() {
     // Bearing space
-    rotate([0,90,0])translate([0,0,-1])cylinder(d=bearing_od, h=bearing_h + 1);
+    rotate([0,90,0])translate([0,0,-1])cylinder(d=bearing_od+0.1, h=bearing_h + 1);
     // clearance
     rotate([0,90,0])cylinder(d=bearing_od - 2, h=bearing_h+3);
 }
@@ -49,9 +49,9 @@ module bearingHolder() {
             // screws
             fourCorners()cylinder(d=m3_dia, h=height + 1);
             // nuts
-            fourCorners()cylinder(d=m3_nut_dia, h=m3_nut_height, $fn=6);
+            fourCorners()cylinder(d=m3_nut_dia, h=m3_nut_height);
             // screw heads
-            translate([0,0,height-2])fourCorners()cylinder(d=m3_nut_dia, h=2);
+            translate([0,0,height-2])fourCorners()cylinder(d=m3_nut_dia, h=2, $fn=6);
         }
         
         // print support
@@ -67,8 +67,8 @@ module bearingHolderBottom() {
         translate([-mount_width/2,0-screw_offset_y-screw_mount_r,bearing_center])cube([mount_width,2*(screw_offset_x + screw_mount_r), bearing_center]);
         //bearing slot
         hull() {
-            translate([0,0 -( screw_offset_y + screw_mount_r),bearing_center - 4])rotate([0,90,90])translate([0,0,-1])cylinder(d=bearing_od, h=bearing_h + 1);
-            translate([0,0 -( screw_offset_y + screw_mount_r),bearing_center])rotate([0,90,90])translate([0,0,-1])cylinder(d=bearing_od, h=bearing_h + 1);
+            translate([0,0 -( screw_offset_y + screw_mount_r),bearing_center - 4])rotate([0,90,90])translate([0,0,-1])cylinder(d=bearing_od + 0.1, h=bearing_h + 1);
+            translate([0,0 -( screw_offset_y + screw_mount_r),bearing_center])rotate([0,90,90])translate([0,0,-1])cylinder(d=bearing_od + 0.1, h=bearing_h + 1);
        }
     // clearance slot
        hull() {
@@ -96,18 +96,10 @@ module bearingHolderBottom() {
 }
 
 module bearingHolderTop() {
-    w = 2*(screw_offset_y + screw_mount_r-bearing_h)+0.1;
     difference() {
         translate([0,0,height])mirror([0,0,1])bearingHolder();
         // slice top off
-        translate([-mount_width/2,0-screw_offset_y-screw_mount_r,bearing_center-2])cube([mount_width,2*(screw_offset_x + screw_mount_r), bearing_center]);
-        // side
-    translate([bearing_od/2,0-screw_offset_y-screw_mount_r,height-bearing_center])cube([(mount_width-bearing_od)/2,2*(screw_offset_x + screw_mount_r), bearing_center]);
-        // side
-        translate([-mount_width/2,0-screw_offset_y-screw_mount_r,height-bearing_center])cube([(mount_width-bearing_od)/2,2*(screw_offset_x + screw_mount_r), bearing_center]);
-        // center
-        translate([-mount_width/2,-w/2,height-bearing_center])cube([mount_width,w,bearing_center]);
-        
+        translate([-mount_width/2,-screw_offset_y-screw_mount_r,height-bearing_center])cube([mount_width,2*(screw_offset_x + screw_mount_r), bearing_center]);
    }
 }
 
@@ -116,3 +108,4 @@ module 3DO0001_Bearing_Joint() {
     translate([0,25,0])bearingHolderBottom();
 }
 
+//bearingHolder();
