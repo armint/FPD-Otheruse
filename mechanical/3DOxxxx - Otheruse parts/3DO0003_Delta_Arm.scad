@@ -98,7 +98,7 @@ module deltaArmAlt(length = 90) {
  
 }
 
-module deltaArm(hex = true) {
+module deltaArm() {
     height_h = 12.5;
     axis_distance = 90 - 12;
     end_dia = 15;
@@ -121,19 +121,14 @@ module deltaArm(hex = true) {
         translate([-end_dia/2 + 3, axis_distance - 12, 0])cylinder(d=m3_dia, h=height_h);
         translate([end_dia/2 - 3, axis_distance - 12, 0])cylinder(d=m3_dia, h=height_h);
         // nut holes
-        if (hex) {
-            translate([-end_dia/2 + 3, axis_distance - 12, 4])cylinder(d=m3_nut_dia, h=height_h, $fn=6);
-            translate([end_dia/2 - 3, axis_distance - 12, 4])cylinder(d=m3_nut_dia, h=height_h, $fn=6);
-        }
-        else {
-            translate([-end_dia/2 + 3, axis_distance - 12, 4])cylinder(d=m3_nut_dia, h=height_h);
-            translate([end_dia/2 - 3, axis_distance - 12, 4])cylinder(d=m3_nut_dia, h=height_h);
-        }
+        translate([-end_dia/2 + 3, axis_distance - 12, 4])cylinder(d=m3_nut_dia, h=height_h, $fn=6);
+        translate([end_dia/2 - 3, axis_distance - 12, 4])cylinder(d=m3_nut_dia, h=height_h);
     }
 }
 
 //$fa=3;
 //$fs=0.2;
-deltaArm(true);
-translate([28,62,0])mirror([0,1,0])deltaArm(false);
+module 3DO0003_Delta_Arm() {
+    deltaArm();
+}
 

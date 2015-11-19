@@ -19,10 +19,14 @@ module deltaArmConnector() {
             }
             // limit switch interruptor
             hull() {
-                translate([0,0,16])rotate([90,0,0])cylinder(d=2, h=1, center=true);
-                translate([18,0,16])rotate([90,0,0])cylinder(d=2, h=1, center=true);
-                translate([0,0,1])rotate([90,0,0])cylinder(d=2, h=1, center=true);
-                translate([12,0,1])rotate([90,0,0])cylinder(d=2, h=1, center=true);
+                translate([22,0,40])rotate([90,0,0])cylinder(d=2, h=1, center=true);
+                translate([18,0,40])rotate([90,0,0])cylinder(d=2, h=1, center=true);
+
+                translate([16,0,16])rotate([90,0,0])cylinder(d=2, h=1, center=true);
+//                translate([18,0,16])rotate([90,0,0])cylinder(d=2, h=1, center=true);
+                translate([6,0,10])rotate([90,0,0])cylinder(d=2, h=1, center=true);
+                translate([5,0,1])rotate([90,0,0])cylinder(d=2, h=1, center=true);
+                translate([15,0,1])rotate([90,0,0])cylinder(d=2, h=1, center=true);
             }
         }
         translate([0,-height/2,17])rotate([-90,0,0]) {
@@ -42,4 +46,8 @@ module deltaArmConnector() {
 
 //$fs=0.2;
 
-deltaArmConnector();
+module 3DO0005_Delta_Arm_Connector() {
+    deltaArmConnector();
+}
+
+//deltaArmConnector();

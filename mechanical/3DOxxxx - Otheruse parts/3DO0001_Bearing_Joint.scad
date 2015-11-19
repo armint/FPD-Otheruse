@@ -111,6 +111,8 @@ module bearingHolderTop() {
    }
 }
 
-bearingHolderTop();
-translate([0,25,0])bearingHolderBottom();
+module 3DO0001_Bearing_Joint() {
+    bearingHolderTop();
+    translate([0,25,0])bearingHolderBottom();
+}
 

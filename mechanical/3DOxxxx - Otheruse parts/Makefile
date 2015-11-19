@@ -20,7 +20,7 @@ $(TARGET) :
 
 $(TARGET)/%.stl : %.scad $(EXTRAS)
 	@echo "Processing $@"
-	$(OPENSCAD) -o $@ -D'$(OPENSCAD_SETTINGS)' $<
+	$(OPENSCAD) -o $@ -D'$(OPENSCAD_SETTINGS);$(subst $(TARGET)/,,$(subst .stl,();,$@))' $<
 
 clean :
 	rm @-rm -f $(TARGET) $(TARGETS)

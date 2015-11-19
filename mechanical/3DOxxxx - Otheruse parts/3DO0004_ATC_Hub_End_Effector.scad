@@ -107,5 +107,6 @@ module atcHub() {
 }
 //$fa=3;
 //$fs=0.2;
-
-atcHub();
+module 3DO0004_ATC_Hub_End_Effector() {
+    atcHub();
+}

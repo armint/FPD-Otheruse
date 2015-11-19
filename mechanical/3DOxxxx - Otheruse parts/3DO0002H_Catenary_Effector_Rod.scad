@@ -33,4 +33,7 @@ module splitRod(length = 270, centerWidth=12, centerHeight=12, plate_thickness =
     translate([13, length/2+15, 0])rotate([0,0,180])splitRodBase(length, centerWidth, centerHeight, plate_thickness, false);
 }
 
-splitRod(262);
+module 3DO0002H_Catenary_Effector_Rod() {
+    splitRod(262);
+}
+

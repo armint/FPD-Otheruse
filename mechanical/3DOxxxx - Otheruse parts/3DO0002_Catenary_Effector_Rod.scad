@@ -2,4 +2,6 @@
 
 include <3DO0002.scad>
 
-rod(length=262);
+module 3DO0002_Catenary_Effector_Rod() {
+    rod(length=262);
+}
