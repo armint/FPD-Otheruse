@@ -43,13 +43,10 @@ module forkSpacer(d, h) {
 
 
 module fork() {
-    bearingFork(fork_distance = fork_spacing, fork_height=21);
+    bearingFork(fork_distance = fork_spacing, fork_height=18);
 }
 
-module fork2() {
-}
 
 module 3DO0006_Bearing_Fork() {
-    bearingFork(fork_distance = fork_spacing, fork_height=21);
-    bearingFork(fork_distance = fork_spacing, fork_height=21, hexNut = false);
+    bearingFork(fork_distance = fork_spacing, fork_height=18);
 }

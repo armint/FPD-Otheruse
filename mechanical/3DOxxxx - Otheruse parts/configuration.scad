@@ -4,7 +4,7 @@ bearing_od = 10;
 bearing_id = 3;
 bearing_h = 4;
 
-m2_dia = 2.4;
+m2_dia = 2.2;
 m2_nut_dia = 4.5;
 m2_nut_slot = 3.9;
 m2_nut_height = 2;

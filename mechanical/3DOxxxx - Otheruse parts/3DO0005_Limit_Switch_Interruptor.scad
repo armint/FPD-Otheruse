@@ -50,4 +50,4 @@ module 3DO0005_Limit_Switch_Interruptor() {
     limitSwitchInterruptor();
 }
 
-limitSwitchInterruptor();
+//limitSwitchInterruptor();
