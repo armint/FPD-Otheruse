@@ -5,7 +5,7 @@ include <shapes.scad>
 module atcHub(body=true, caps = true) {
     triangle_base = 38;
     cone_top_dia = 40;
-   cone_bottom_dia = cone_top_dia-tan(9.5)*cone_top_dia;
+    cone_bottom_dia = cone_top_dia-tan(9.5)*cone_top_dia;
  
     triangle_h = 12.5;
     hub_h = 19;
@@ -158,7 +158,7 @@ module atcHubCaps() {
 }
 
 //$fa=3;
-$fs=0.3;
+//$fs=0.3;
 module 3DO0004_ATC_Hub_End_Effector() {
     atcHub();
 }
