@@ -89,6 +89,7 @@ module deltaArmAlt(length = 90) {
         translate([0,length,height_l - bearing_h])cylinder(d=bearing_od + 0.5, h=bearing_h + 1);
          // opening for axis
         translate([0,length,0])cylinder(d=opening, h=height_l);
+         // screw holes
         translate([0,90,0]) {
             translate([3,-11,0])cylinder(d=m3_dia, h=20, center=true);
             translate([-3,-11,0])cylinder(d=m3_dia, h=20, center=true);
@@ -130,6 +131,6 @@ module deltaArm() {
 //$fa=3;
 //$fs=0.2;
 module 3DO0003_Delta_Arm() {
-    deltaArm();
+    deltaArmAlt();
 }
 

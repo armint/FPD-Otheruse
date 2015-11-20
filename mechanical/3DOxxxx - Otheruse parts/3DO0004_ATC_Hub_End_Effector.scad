@@ -63,7 +63,7 @@ module atcHub() {
            // screw hole
            cylinder(d=m3_dia, h=magnet_mount_distance+magnet_mount_dia+1);
            // nut hole
-           cylinder(d=m3_nut_dia, h=21, $fn=6);
+           cylinder(d=bearing_od, h=21);
        }
 
  
@@ -78,7 +78,7 @@ module atcHub() {
                     // body
                     cylinder(d=hexagon_dia*2, h=hub_h, $fn=6);
                     // Joint mounts
-                    threeSides()translate([-10,magnet_mount_distance-magnet_mount_dia/2,0])roundedCube([20, magnet_mount_dia, 15]);
+                    threeSides()translate([-10,magnet_mount_distance-magnet_mount_dia/2,0])roundedCube([20, magnet_mount_dia+4, 15]);
                     // Magnet mounts 
                     threeSides()translate([0,magnet_mount_distance,0])roundedCylinder(d=magnet_mount_dia, h=hub_h);
                }
@@ -110,3 +110,4 @@ module atcHub() {
 module 3DO0004_ATC_Hub_End_Effector() {
     atcHub();
 }
+atcHub();

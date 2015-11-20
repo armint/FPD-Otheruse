@@ -1,19 +1,14 @@
 
 include <configuration.scad>
 include <shapes.scad>
+include <3DO0007_Bearing_Cap.scad>
 
 module rod(length = 270, centerWidth=12, centerHeight=12, plate_thickness = 4) {
-    end_dia = 10;
     cat1D = centerWidth/2 - 1;
     cat2D = centerHeight - 2;
-    difference() {
-        roundedCylinder(d=end_dia, h=5);
-        cylinder(d=m3_dia, h=5);
-    }
-    translate([0,length,0])difference() {
-        roundedCylinder(d=end_dia, h=5);
-        cylinder(d=m3_dia, h=5);
-    }
+    translate([0,length,0])bearingMount(false);
+    rotate([0,0,180])bearingMount(false);
+
     rotate([0,0,90])
     difference() {
         union() {
@@ -31,9 +26,8 @@ module rod(length = 270, centerWidth=12, centerHeight=12, plate_thickness = 4) {
                  sphere(r=1,center=true);
             }
         }
-        // 
-        cylinder(d=m3_nut_dia, h=10);
-        translate([length,0,0])cylinder(d=m3_nut_dia, h=10);
+        cylinder(d=bearing_od, h=20);
+        translate([length,0,0])cylinder(d=bearing_od, h=20);
     }
 }
 
