@@ -79,4 +79,6 @@ module rod(length = 270, centerWidth=12, centerHeight=12, plate_thickness = 4) {
  
     }
  }
-
+ 
+//$fs=0.3;
+//rod();

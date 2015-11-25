@@ -2,7 +2,7 @@
 include <configuration.scad>
 include <shapes.scad>
 
-fork_spacing = bearing_h + 5;
+fork_spacing = bearing_h + 6;
 
 module bearingFork(fork_distance, fork_height, hexNut = true) {
     base_height = 5;
@@ -50,3 +50,14 @@ module fork() {
 module 3DO0006_Bearing_Fork() {
     bearingFork(fork_distance = fork_spacing, fork_height=18);
 }
+
+$fs=0.2;
+$fa=3;
+for (d=[0:12:36]) {
+    translate([d,0,0])fork();
+}
+
+for (d=[0:12:36]) {
+    translate([d,20,0])fork(bearing_h + 7);
+}
+

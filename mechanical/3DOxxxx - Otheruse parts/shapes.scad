@@ -18,6 +18,27 @@ module catenary(length=100, width=5, a = 25, step=1) {
     }
 }
 
+module trapezoid(base, top, h) {
+    polygon([[0,-base/2],[0,base/2],[h,top/2],[h,-top/2]]);
+}
+
+module arc(w=1, r, angle) {
+    difference() {
+        circle(r=r+w/2);
+        circle(r=r-w/2);
+        rotate(angle/2)translate([-r-w/2,0])square([r*2+w,r*2+w]);
+        rotate(180-angle/2)translate([-r-w/2,0])square([r*2+w,r*2+w]);
+    }
+}
+
+module wedge(r, angle) {
+    difference() {
+        circle(r=r);
+        rotate(angle/2)translate([-r,0])square([r*2,r*2]);
+        rotate(180-angle/2)translate([-r,0])square([r*2,r*2]);
+    }
+}
+
 // 3D basic shapes
 
 module roundedCube(size = [10,10,10],radius=1) {
@@ -51,5 +72,4 @@ module roundedBox(size = [1,1,1],radius=1) {
         translate([radius,radius,size[2]/2])cylinder(r=radius,h=size[2],center=true);
     }
 }
-
 
