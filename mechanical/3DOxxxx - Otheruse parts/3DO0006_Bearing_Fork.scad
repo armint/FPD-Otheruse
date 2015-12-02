@@ -53,4 +53,5 @@ module 3DO0006_Bearing_Fork() {
 
 //$fs=0.2;
 //$fa=3;
-
+//
+//forkSpacer(d=m3_dia+2, h=2.8);
