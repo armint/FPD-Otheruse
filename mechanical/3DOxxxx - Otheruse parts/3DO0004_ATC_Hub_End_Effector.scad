@@ -97,12 +97,12 @@ module atcHub(body=true, caps = true) {
             translate([-12,12,0])cylinder(d=m3_dia, h=30, center=true);
             // fan nut slots
             hull() {
-                translate([12,12,nut_depth])rotate([0,0,30])cylinder(d=m3_nut_slot, h=m3_nut_height, $fn=6);
-                translate([12,hub_h,nut_depth])rotate([0,0,30])cylinder(d=m3_nut_slot, h=m3_nut_height, $fn=6);
+                translate([12,12,nut_depth])rotate([0,0,30])cylinder(d=m3_nut_dia, h=m3_nut_height, $fn=6);
+                translate([12,hub_h,nut_depth])rotate([0,0,30])cylinder(d=m3_nut_dia, h=m3_nut_height, $fn=6);
             }
             hull() {
-                translate([-12,12,nut_depth])rotate([0,0,30])cylinder(d=m3_nut_slot, h=m3_nut_height, $fn=6);
-                translate([-12,hub_h,nut_depth])rotate([0,0,30])cylinder(d=m3_nut_slot, h=m3_nut_height, $fn=6);
+                translate([-12,12,nut_depth])rotate([0,0,30])cylinder(d=m3_nut_dia, h=m3_nut_height, $fn=6);
+                translate([-12,hub_h,nut_depth])rotate([0,0,30])cylinder(d=m3_nut_dia, h=m3_nut_height, $fn=6);
             }
        }
 }
@@ -117,7 +117,7 @@ module atcHub(body=true, caps = true) {
                         // body
                         cylinder(d=hexagon_dia*2, h=hub_h, $fn=6);
                         // Bearing holders
-                        threeSides()bearingHolder();
+                        threeSides()render()bearingHolder();
                         // Magnet mounts 
                         threeSides()translate([0,27,0])roundedCylinder(d=magnet_mount_dia, h=hub_h);
                    }
@@ -157,9 +157,10 @@ module atcHubCaps() {
     atcHub(body=false, caps = true);
 }
 
-//$fa=3;
-//$fs=0.3;
+$fa=3;
+$fs=0.3;
 module 3DO0004_ATC_Hub_End_Effector() {
     atcHub();
 }
-//atcHub();
+atcHubBody();
+atcHubCaps();

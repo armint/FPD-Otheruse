@@ -3,6 +3,39 @@ include <configuration.scad>
 include <shapes.scad>
 
 wall_thickness = 2.5;
+$fs=0.3;
+$fa=2;
+
+deltaArmM4();
+
+module deltaArmM4(length = 90) {
+    opening = bearing_od - 2;
+    mount_dia = 12;
+    height_h = 12.5;
+    height_l = 9;
+    nut_depth = 5;
+    screw_dist = 7;
+    difference() {
+        union() {
+            mountHoles(height_h)deltaArmBase(height_h = 12.5, length = length, height_l = height_l, end_dia=12);
+            translate([0,length,0])cylinder(d=mount_dia, h=height_l);
+         }
+         // flatten end
+         translate([0,length,height_l])cylinder(d=mount_dia, h=1);
+         // m4 hole
+        translate([0,length,-1])cylinder(d=m4_dia, h=height_l +2);
+         // nut slot
+        translate([0,length,-1])cylinder(d=m4_nut_dia, h=m4_nut_height+1, $fn=6);
+         // screw holes
+        translate([0,90,0]) {
+            translate([3,-11,0])cylinder(d=m3_dia, h=20, center=true);
+            translate([-3,-11,0])cylinder(d=m3_dia, h=20, center=true);
+
+         }
+    }
+ 
+}
+
 
 module mountHoles(depth = 10) {
     difference() {
