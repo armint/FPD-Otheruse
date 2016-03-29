@@ -14,7 +14,7 @@ module atcHub(body=true, caps = true) {
     hexagon_dia = side_distance/sin(60);
     fan_opening_dia = 21;
     fan_screw_dist = 12;
-    mount_width = 29;
+    mount_width = 30;
     bearing_mount_r = bearing_od/2 + 1.5;
     mount_len = triangle_base + bearing_mount_r;
     opening = bearing_od - 2;
@@ -38,9 +38,9 @@ module atcHub(body=true, caps = true) {
         difference() {
             union() {
                 // end block
-                translate([-mount_width/2,mount_len - 2*bearing_mount_r,0])roundedCube([mount_width, 2*bearing_mount_r, 16]);
+                translate([-mount_width/2,mount_len - 13,0])roundedCube([mount_width, 13, 13]);
                 // screw extension
-                threeBolts()cylinder(d=m3_nut_dia + 2, h=8);
+//                threeBolts()cylinder(d=m3_nut_dia + 2, h=8);
                 if (with_connector) {
                     // connector
                     translate([-7,side_distance-1,0])roundedCube([14, mount_len-side_distance+1, 2*bearing_mount_r]);
@@ -50,9 +50,20 @@ module atcHub(body=true, caps = true) {
                 // Make space for magnet mount 
                 translate([0,27,0])cylinder(d=magnet_mount_dia, h=hub_h);
             }
-
+            // Nut slots
+            hull() {
+                translate([mount_width/2-8,mount_len-6.5,0])rotate([0,90,0])cylinder(d=m4_nut_dia, h=m4_nut_height, $fn=6);
+                translate([mount_width/2-8,mount_len-6.5,13])rotate([0,90,0])cylinder(d=m4_nut_dia, h=m4_nut_height, $fn=6);
+            }
+            hull() {
+                translate([-mount_width/2+8-m4_nut_height,mount_len-6.5,0])rotate([0,90,0])cylinder(d=m4_nut_dia, h=m4_nut_height, $fn=6);
+                translate([-mount_width/2+8-m4_nut_height,mount_len-6.5,13])rotate([0,90,0])cylinder(d=m4_nut_dia, h=m4_nut_height, $fn=6);
+            }
             // bearing axis
-            translate([0,triangle_base,bearing_mount_r])rotate([0,90,0])cylinder(d=4.5, h=mount_width, center=true);
+            translate([0,triangle_base,bearing_mount_r])rotate([0,90,0])cylinder(d=m4_dia, h=mount_width, center=true);
+            // Extra hole
+            translate([0,triangle_base,bearing_mount_r])rotate([0,0,0])cylinder(d=m3_dia, h=mount_width, center=true);
+            
 
        }
      }
@@ -137,10 +148,10 @@ module atcHubCaps() {
     atcHub(body=false, caps = true);
 }
 
-$fa=3;
-$fs=0.3;
+//$fa=3;
+//$fs=0.3;
 module 3DO0004_ATC_Hub_End_Effector() {
     atcHub();
 }
-atcHubBody();
+//atcHubBody();
 //atcHubCaps();

@@ -1,7 +1,7 @@
 include <3DO0001_Bearing_Joint.scad>
 include <3DO0002_Catenary_Effector_Rod.scad>
 include <3DO0003_Delta_Arm.scad>
-include <3DO0004_ATC_Hub_End_Effector.scad>
+include <3DO0004b_ATC_Hub_End_Effector_M4.scad>
 include <3DO0005_Limit_Switch_Interruptor.scad>
 include <3DO0006_Bearing_Fork.scad>
 //include <3DO0007_Bearing_Cap.scad>
@@ -36,15 +36,9 @@ module completeAtcHub() {
 }
 
 module oneArm() {
-    translate([0,0,6])deltaArmAlt();
+    translate([0,0,6])deltaArmM4();
     translate([0,0,0])translate([0,74,0])rotate([-90,0,0])limitSwitchInterruptor();
-    translate([0,0,-6])rotate([0,180,0])deltaArmAlt();
-    // Top forks
-    translate([0,90,15])rotate([0,0,90-rod_angle])fork();
-    translate([0,90,-15])rotate([0,180,90-rod_angle])fork();
-    // Bottom forks
-    translate([-effector_height,effector_d-base_d,15])rotate([0,0,90-rod_angle])fork();
-    translate([-effector_height,effector_d-base_d,-15])rotate([0,180,90-rod_angle])fork();
+    translate([0,0,-6])rotate([0,180,0])deltaArmM4();
     translate([0,90,29])rotate([0,90,180-rod_angle])translate([0,0,-3])completeRod();
     translate([0,90,-29])rotate([0,90,180-rod_angle])translate([0,0,-3])completeRod();
 }
@@ -58,4 +52,4 @@ module assembly() {
 
 //$fs=0.3;
 //$fa=3;
-//assembly();
+assembly();

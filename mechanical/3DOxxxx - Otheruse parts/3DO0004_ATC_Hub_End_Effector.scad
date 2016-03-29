@@ -157,10 +157,10 @@ module atcHubCaps() {
     atcHub(body=false, caps = true);
 }
 
-$fa=3;
-$fs=0.3;
 module 3DO0004_ATC_Hub_End_Effector() {
     atcHub();
 }
-atcHubBody();
-atcHubCaps();
+//$fa=3;
+//$fs=0.3;
+//atcHubBody();
+//atcHubCaps();

@@ -3,13 +3,8 @@ include <configuration.scad>
 include <shapes.scad>
 
 wall_thickness = 2.5;
-$fs=0.3;
-$fa=2;
-
-deltaArmM4();
 
 module deltaArmM4(length = 90) {
-    opening = bearing_od - 2;
     mount_dia = 12;
     height_h = 12.5;
     height_l = 9;
@@ -161,9 +156,11 @@ module deltaArm() {
     }
 }
 
-//$fa=3;
-//$fs=0.2;
 module 3DO0003_Delta_Arm() {
     deltaArmAlt();
 }
 
+$fs=0.3;
+$fa=2;
+
+deltaArmM4();
