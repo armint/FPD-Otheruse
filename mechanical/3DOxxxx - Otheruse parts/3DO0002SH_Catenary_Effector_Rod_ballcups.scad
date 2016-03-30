@@ -9,4 +9,4 @@ module 3DO0002SH_Catenary_Effector_Rod_ballcups() {
 }
 
 
-3DO0002SH_Catenary_Effector_Rod_ballcups();
+//3DO0002SH_Catenary_Effector_Rod_ballcups();

@@ -1,7 +1,6 @@
 
 include <configuration.scad>
 include <shapes.scad>
-//include <3DO0007_Bearing_Cap.scad>
 
 bearing_space = bearing_od + 0.3;
 
@@ -120,7 +119,7 @@ module rodB(length = 270, centerWidth=12, centerHeight=12, plate_thickness = 4, 
                     }
                     translate([-10,0,0])cube([20,20,10]);
                 }
-                translate([-(id + 2)/2,-24,3])springThingy(h=8, w=id + 2, d = 7);
+                translate([-(id + 2)/2,-24,3])springThingy(h=9, w=id + 2, d = 7);
             }
         }
   
@@ -154,8 +153,8 @@ module springThingy(h=8, w=10, d=6) {
     }
 }
 
-$fs=0.3;
-$fa = 3;
-rodB();
+//$fs=0.3;
+//$fa = 3;
+//rodB();
 //translate([0,135,9])rotate([0,0,90])import("/home/armin/dev/firepick/FPD-Otheruse/mechanical/3DLCxxxx - LooseCanon parts/STL/3DLC0234X.stl", convexity = 10);
 //linear_extrude(5, scale=2)square([6,20], center=true);
