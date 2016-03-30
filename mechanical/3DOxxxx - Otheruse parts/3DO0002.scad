@@ -84,7 +84,7 @@ module rodB(length = 270, centerWidth=12, centerHeight=12, plate_thickness = 4, 
     wall_thickness = 1;
     cat1D = centerWidth/2 - 1;
     cat2D = centerHeight - 2;
-    id = ball_dia + 0.5;
+    id = ball_dia - 0.5;
     
      module bothSides() {
         translate([0,length,0])children();
@@ -109,13 +109,18 @@ module rodB(length = 270, centerWidth=12, centerHeight=12, plate_thickness = 4, 
                 }
             }
             bothSides()Cup(id=id);
+            // bottom side
+            translate([-(id + 2)/2,17,0])springThingy(h=12, w=id + 2, d = 7);
             // Top side 
-            difference() {
-                hull() {
-                    translate([0,-10,0.5])cube([6,20,1], center=true);
-                    translate([0,-10,3.5])cube([id + 2, 26, 1], center=true);
+           translate([0,length,0])rotate([0,0,180]) {
+               difference() {
+                    hull() {
+                        translate([0,-10,0.5])cube([6,20,1], center=true);
+                        translate([0,-10,3.5])cube([id + 2, 28, 1], center=true);
+                    }
+                    translate([-10,0,0])cube([20,20,10]);
                 }
-                translate([-10,0,0])cube([20,20,10]);
+                translate([-(id + 2)/2,-24,3])springThingy(h=8, w=id + 2, d = 7);
             }
         }
   
@@ -123,8 +128,7 @@ module rodB(length = 270, centerWidth=12, centerHeight=12, plate_thickness = 4, 
  }
  
  
-module Cup(id = 10.5) {
-    height = 10;
+module Cup(id = 10.5, height = 9.5) {
     od = id + 2;
     difference() {
         roundedCylinder(d=od, rr=0.5, h=height);
@@ -134,19 +138,24 @@ module Cup(id = 10.5) {
         mirror([1,0,0])translate([2,-od/2,0])rotate([0,45,0])cube([od, od, od]);
     }
 }
-$fs=0.3;
-$fa = 3;
-//rodB();
-//Cup();
-module springThingy(h=6, w=10, d=6) {
+
+module springThingy(h=8, w=10, d=6) {
     difference() {
         hull() {
             translate([0,d/2,h])rotate([0,90,0])roundedCylinder(d=d, rr=1, h=w);
             roundedCube([w, d, 4]);
         }
+        // wire hole
         translate([0,d/2,h])rotate([0,90,0])cylinder(d=2, h=w);
-        
+        translate([0,d/2,h])rotate([0,90,0])cylinder(d2=2, d1=3, h=1);
+        translate([w-1,d/2,h])rotate([0,90,0])cylinder(d1=2, d2=3, h=1);
+        // slot
+        translate([w/2-3/2,-1,4])cube([3, d+2, h]);
     }
 }
-springThingy();
+
+$fs=0.3;
+$fa = 3;
+rodB();
+//translate([0,135,9])rotate([0,0,90])import("/home/armin/dev/firepick/FPD-Otheruse/mechanical/3DLCxxxx - LooseCanon parts/STL/3DLC0234X.stl", convexity = 10);
 //linear_extrude(5, scale=2)square([6,20], center=true);

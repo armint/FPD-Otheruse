@@ -16,7 +16,7 @@ m2_nut_slot = nutSlot(2);
 m2_nut_height = nutHeight(2);
 
 m3_dia = boltDia(3);
-m3_nut_dia = nutDia(3);
+m3_nut_dia = nutDia(3) + 0.2;
 m3_nut_slot = nutSlot(3);
 m3_nut_height = nutHeight(3);
 

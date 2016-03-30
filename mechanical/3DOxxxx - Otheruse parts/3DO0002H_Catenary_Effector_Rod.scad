@@ -1,16 +1,16 @@
-
+//
 include <3DO0002.scad>
 
-module splitRodBase(length = 270, centerWidth=12, centerHeight=12, plate_thickness = 4, hex = true) {
+module splitRodBase(length = 270, centerWidth=12, centerHeight=12, hex = true) {
     connector_len = 30;
     difference() {
 //        color([1,0,0,1])
         union() {
-            rod(length, centerWidth, centerHeight, plate_thickness);
+            translate([0,hex ? 0 : length ,0])rotate([0,0,hex ? 0 :  180])children();
             translate([-centerWidth/2, length/2 - connector_len/2], 0)roundedCube([centerWidth/2, connector_len, centerHeight]);
         }
         // Remove part of the rod
-        translate([-10, length/2 + connector_len/2], 0)cube([20, length/2, 20]);
+        translate([-10, length/2 + connector_len/2], 0)cube([20, length, 20]);
         // Remove half of the connector
         translate([0, length/2 - connector_len/2], 0)cube([20, connector_len, 20]);
         // Screw holes (we use a smaller diameter here for a perfect fit...)
@@ -29,11 +29,12 @@ module splitRodBase(length = 270, centerWidth=12, centerHeight=12, plate_thickne
 }
 
 module splitRod(length = 270, centerWidth=12, centerHeight=12, plate_thickness = 4) {
-    splitRodBase(length, centerWidth, centerHeight, plate_thickness, true);
-    translate([13, length/2+15, 0])rotate([0,0,180])splitRodBase(length, centerWidth, centerHeight, plate_thickness, false);
+    splitRodBase(length, centerWidth, centerHeight, true)rod(length, centerWidth, centerHeight, plate_thickness);
+    translate([13, length/2+15, 0])rotate([0,0,180])splitRodBase(length, centerWidth, centerHeight, false)rod(length, centerWidth, centerHeight, plate_thickness);
 }
 
 module 3DO0002H_Catenary_Effector_Rod() {
-    splitRod(262);
+    splitRod(length = 262);
 }
 
+//splitRod(length = 262);

@@ -1,13 +1,15 @@
 include <shapes.scad>
 include <configuration.scad>
-//include <3DO0003_Delta_Arm.scad>
+include <3DO0003_Delta_Arm.scad>
 drive_wheel_height = 12;
 
-$fs=0.3;
-$fa=2;
+//$fs=0.3;
+//$fa=2;
+//translate([-30,0,drive_wheel_height])rotate([0,0,-15])deltaArmM4();
 
-//translate([-30,0,drive_wheel_height])rotate([0,0,-15])deltaArmAlt();
-DeltaPulley(teeth = 152);
+module 3DO0012_Delta_pulley_152T() {
+    DeltaPulley(teeth = 152);    
+}
 
 module DeltaPulley(teeth) {
     sliceoff = 30;

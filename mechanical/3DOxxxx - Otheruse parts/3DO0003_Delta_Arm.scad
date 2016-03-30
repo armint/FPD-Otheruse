@@ -28,6 +28,8 @@ module deltaArmM4(length = 90) {
 
          }
     }
+    // print support
+    color([1,0,0])translate([0,length,m4_nut_height])cylinder(d=m4_nut_dia, h=print_layer_height, $fn=6);
  
 }
 
@@ -160,7 +162,7 @@ module 3DO0003_Delta_Arm() {
     deltaArmAlt();
 }
 
-$fs=0.3;
-$fa=2;
-
-deltaArmM4();
+//$fs=0.3;
+//$fa=2;
+//
+//deltaArmM4();
