@@ -19,17 +19,17 @@ module deltaArmM4(length = 90) {
          translate([0,length,height_l])cylinder(d=mount_dia, h=1);
          // m4 hole
         translate([0,length,-1])cylinder(d=m4_dia, h=height_l +2);
-         // nut slot
-        translate([0,length,-1])cylinder(d=m4_nut_dia, h=m4_nut_height+1, $fn=6);
+         // Screw head space
+        translate([0,length,-1])cylinder(d=8.4, h=m4_nut_height+1);
          // screw holes
         translate([0,90,0]) {
-            translate([3,-11,0])cylinder(d=m3_dia, h=20, center=true);
-            translate([-3,-11,0])cylinder(d=m3_dia, h=20, center=true);
+//            #translate([3,-11,0])cylinder(d=m3_dia, h=20, center=true);
+            translate([0,-11,0])cylinder(d=m3_dia, h=20, center=true);
 
          }
     }
     // print support
-    color([1,0,0])translate([0,length,m4_nut_height])cylinder(d=m4_nut_dia, h=print_layer_height, $fn=6);
+    color([1,0,0])translate([0,length,m4_nut_height])cylinder(d=8.4, h=print_layer_height);
  
 }
 

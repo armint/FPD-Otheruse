@@ -20,8 +20,8 @@ module deltaArmConnector() {
         }
         translate([0,-height/2-1,17])rotate([-90,0,0]) {
             // screw holes
-            translate([-3, 12, 0])cylinder(d=m3_dia, h=height+2);
-            translate([3, 12, 0])cylinder(d=m3_dia, h=height+2);
+//            translate([-3, 12, 0])cylinder(d=m3_dia, h=height+2);
+            translate([0, 12, 0])cylinder(d=m3_dia, h=height+2);
             translate([0, 1, 0])cylinder(d=m4_dia, h=height+2);
         }
         // slice tiny edge of bottom

@@ -79,11 +79,10 @@ module rod(length = 270, centerWidth=12, centerHeight=12, plate_thickness = 4) {
     }
  }
  
-module rodB(length = 270, centerWidth=12, centerHeight=12, plate_thickness = 4, ball_dia = 10) {
+module rodB(length = 270, centerWidth=12, centerHeight=12, plate_thickness = 4, cup_dia = 10.4) {
     wall_thickness = 1;
     cat1D = centerWidth/2 - 1;
     cat2D = centerHeight - 2;
-    id = ball_dia - 0.5;
     
      module bothSides() {
         translate([0,length,0])children();
@@ -107,19 +106,19 @@ module rodB(length = 270, centerWidth=12, centerHeight=12, plate_thickness = 4, 
                      sphere(r=1,center=true);
                 }
             }
-            bothSides()Cup(id=id);
+            bothSides()Cup(id=cup_dia);
             // bottom side
-            translate([-(id + 2)/2,17,0])springThingy(h=12, w=id + 2, d = 7);
+            translate([-(cup_dia + 2)/2,17,0])springThingy(h=12, w=cup_dia + 2, d = 7);
             // Top side 
            translate([0,length,0])rotate([0,0,180]) {
                difference() {
                     hull() {
                         translate([0,-10,0.5])cube([6,20,1], center=true);
-                        translate([0,-10,3.5])cube([id + 2, 28, 1], center=true);
+                        translate([0,-10,3.5])cube([cup_dia + 2, 28, 1], center=true);
                     }
                     translate([-10,0,0])cube([20,20,10]);
                 }
-                translate([-(id + 2)/2,-24,3])springThingy(h=9, w=id + 2, d = 7);
+                translate([-(cup_dia + 2)/2,-24,3])springThingy(h=9, w=cup_dia + 2, d = 7);
             }
         }
   
