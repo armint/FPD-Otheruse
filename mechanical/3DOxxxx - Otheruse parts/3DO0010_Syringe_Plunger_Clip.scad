@@ -29,4 +29,4 @@ module PlungerClip() {
 
 //PlungerClip();
 
-//Clip(width=60, height=50, thickness = 20, slot=2, slot_offset=[0,0,-5], slot_dia=48, bore_dia = 32, rr=2);
+//Clip(width=60, height=50, thickness = 10, slot=2, slot_offset=[0,0,-1], slot_dia=48, bore_dia = 32, rr=2);

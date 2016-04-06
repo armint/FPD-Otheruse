@@ -162,7 +162,7 @@ module 3DO0003_Delta_Arm() {
     deltaArmAlt();
 }
 
-//$fs=0.3;
-//$fa=2;
-//
-//deltaArmM4();
+$fs=0.3;
+$fa=2;
+
+deltaArmM4();

@@ -1,23 +1,19 @@
 include <configuration.scad>
 include <shapes.scad>
 
+triangle_base = 38;
+mount_width = 30;
+bearing_mount_r = bearing_od/2 + 1.5;
+mount_len = triangle_base + bearing_mount_r;
+screw_head_depth = 9 - m4_nut_height;
 
 module atcHub() {
-    triangle_base = 38;
     cone_top_dia = 40;
     cone_bottom_dia = cone_top_dia-tan(9.5)*cone_top_dia;
- 
-    triangle_h = 12.5;
     hub_h = 19;
-    triangle_corner_dia = 6;
     side_distance = 25.5;
     hexagon_dia = side_distance/sin(60);
     fan_opening_dia = 21;
-    fan_screw_dist = 12;
-    mount_width = 30;
-    bearing_mount_r = bearing_od/2 + 1.5;
-    mount_len = triangle_base + bearing_mount_r;
-    opening = bearing_od - 2;
     magnet_height = 6;
     magnet_dia=6.3;
     magnet_mount_dia=9.5;
@@ -55,10 +51,10 @@ module atcHub() {
             }
             // Nut slots
             hull() {
-                translate([mount_width/2-m4_nut_height-9,mount_len-6.5,bearing_mount_r])rotate([0,90,0])cylinder(d=m4_nut_dia, h=m4_nut_height);
-                translate([mount_width/2-m4_nut_height-9,mount_len-6.5,13])rotate([0,90,0])cylinder(d=m4_nut_dia, h=m4_nut_height);
-                translate([-mount_width/2+9,mount_len-6.5,bearing_mount_r])rotate([0,90,0])cylinder(d=m4_nut_dia, h=m4_nut_height);
-                translate([-mount_width/2+9,mount_len-6.5,13])rotate([0,90,0])cylinder(d=m4_nut_dia, h=m4_nut_height);
+                translate([mount_width/2-m4_nut_height-screw_head_depth,mount_len-6.5,bearing_mount_r])rotate([0,90,0])cylinder(d=m4_nut_dia, h=m4_nut_height);
+                translate([mount_width/2-m4_nut_height-screw_head_depth,mount_len-6.5,13])rotate([0,90,0])cylinder(d=m4_nut_dia, h=m4_nut_height);
+                translate([-mount_width/2+screw_head_depth,mount_len-6.5,bearing_mount_r])rotate([0,90,0])cylinder(d=m4_nut_dia, h=m4_nut_height);
+                translate([-mount_width/2+screw_head_depth,mount_len-6.5,13])rotate([0,90,0])cylinder(d=m4_nut_dia, h=m4_nut_height);
             }
 //            hull() {
 //                translate([-mount_width/2+8-m4_nut_height,mount_len-6.5,0])rotate([0,90,0])cylinder(d=m4_nut_dia, h=m4_nut_height, $fn=6);
@@ -143,23 +139,19 @@ module atcHub() {
 }
 
 module cap() {
-    triangle_base = 38;
-    mount_width = 30;
-    bearing_mount_r = bearing_od/2 + 1.5;
-    mount_len = triangle_base + bearing_mount_r;
     difference() {
         union() {
             // center down
-            translate([9+m4_nut_height,0,0])rotate([0,90,0])cylinder(d=m4_nut_dia, h=mount_width-18-2*m4_nut_height);
+            translate([screw_head_depth+m4_nut_height,0,0])rotate([0,90,0])cylinder(d=m4_nut_dia, h=mount_width-2*screw_head_depth-2*m4_nut_height);
             // center fill
-            translate([9,- m4_nut_dia/2,2.5])cube([mount_width-18, m4_nut_dia, 4]);
-            translate([9+m4_nut_height,- m4_nut_dia/2,0])cube([mount_width-18-2*m4_nut_height, m4_nut_dia, 4]);
+            translate([screw_head_depth,- m4_nut_dia/2,2.5])cube([mount_width-2*screw_head_depth, m4_nut_dia, 4]);
+            translate([screw_head_depth+m4_nut_height,- m4_nut_dia/2,0])cube([mount_width-2*screw_head_depth-2*m4_nut_height, m4_nut_dia, 4]);
             // axis fill
             translate([0,- m4_dia/2,m4_dia/2])cube([mount_width, m4_dia, 6.5-m4_dia/2]);
         }
         // head holes
-        translate([8,0,0])rotate([0,90,0])cylinder(d=m4_nut_dia, h=m4_nut_height+1);
-        translate([mount_width-9-m4_nut_height,0,0])rotate([0,90,0])cylinder(d=m4_nut_dia, h=m4_nut_height+1);
+        translate([screw_head_depth-1,0,0])rotate([0,90,0])cylinder(d=m4_nut_dia, h=m4_nut_height+1);
+        translate([mount_width-screw_head_depth-m4_nut_height,0,0])rotate([0,90,0])cylinder(d=m4_nut_dia, h=m4_nut_height+1);
         // mount screw
         translate([mount_width/2,0,-6])cylinder(d=m3_dia, h=20);
         translate([mount_width/2,0,6.5-1.5])cylinder(d=m3_nut_dia, h=10, $fn=6);
@@ -173,5 +165,5 @@ module 3DO0004S_ATC_Hub_End_Effector_M4() {
 //$fa=3;
 //$fs=0.3;
 //atcHub();
-//rotate([180,0,0])cap();
+//translate([40,0,6.5])rotate([180,0,0])cap();
 //atcHubCaps();
