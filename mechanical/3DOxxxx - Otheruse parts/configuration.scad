@@ -25,7 +25,7 @@ m4_nut_dia = nutDia(4);
 m4_nut_height = nutHeight(4);
 
 m5_dia = boltDia(5);
-m5_nut_dia = nutDia(5);
+m5_nut_dia = nutDia(5)-0.4;
 m5_nut_height = nutHeight(5);
 
 m8_dia = boltDia(8);
